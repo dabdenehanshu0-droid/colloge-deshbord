@@ -1,0 +1,6 @@
+{
+  "name": "SGSU AI-Native University Platform",
+  "description": "Scope Global Skills University AI-Native Platform: Continuous learning outcome tracking, AI Smart Classroom, and University Intelligence across Teacher, Student, and Academic Admin layers.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
