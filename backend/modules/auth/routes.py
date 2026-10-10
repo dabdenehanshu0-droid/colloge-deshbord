@@ -9,10 +9,11 @@ from backend.core.db import get_db
 from backend.core.security import get_current_user_claims
 from backend.models.curriculum import User
 from backend.models.governance import AuditLog, AppSetting
-from backend.modules.auth.service import authenticate_demo_role
+from backend.modules.auth.service import authenticate_demo_role, authenticate_student_by_id
 from backend.seed.seed_data import validate_seed_integrity
 from backend.schemas.common import (
     LoginRequest,
+    StudentLoginRequest,
     TokenResponse,
     UserResponse,
     ConfigResponse,
@@ -26,6 +27,13 @@ router = APIRouter(prefix="/api", tags=["Auth & System"])
 def demo_login(request: LoginRequest, db: Session = Depends(get_db)):
     """A01: Demo role selection login."""
     return authenticate_demo_role(request.role, db)
+
+
+@router.post("/auth/student-login", response_model=TokenResponse)
+def student_login(request: StudentLoginRequest, db: Session = Depends(get_db)):
+    """A04: Direct student login by Roll Number or Student ID."""
+    return authenticate_student_by_id(request.student_id, db)
+
 
 
 @router.get("/auth/me", response_model=UserResponse)

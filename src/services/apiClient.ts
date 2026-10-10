@@ -727,5 +727,122 @@ export const api = {
       db: true,
       seed_health: { healthy: true }
     }));
+  },
+
+  // --- STUDENT AUTH & MANAGEMENT (SQL) ---
+  async studentLogin(studentId: string): Promise<any> {
+    return request<any>('/auth/student-login', {
+      method: 'POST',
+      body: JSON.stringify({ student_id: studentId })
+    });
+  },
+
+  async addStudent(data: { name: string; email: string; roll_no: string; section_id: number }): Promise<any> {
+    return request<any>('/students', {
+      method: 'POST',
+      body: JSON.stringify(data)
+    });
+  },
+
+  async removeStudent(studentId: number): Promise<any> {
+    return request<any>(`/students/${studentId}`, {
+      method: 'DELETE'
+    });
+  },
+
+  async updateAttendance(studentId: number, status: 'PRESENT' | 'ABSENT'): Promise<any> {
+    return request<any>('/students/attendance', {
+      method: 'POST',
+      body: JSON.stringify({ student_id: studentId, status })
+    });
+  },
+
+  async getStudents(sectionId?: number): Promise<any[]> {
+    const qs = sectionId ? `?section_id=${sectionId}` : '';
+    return request<any[]>(`/students${qs}`, {});
+  },
+
+  async getSections(): Promise<{ id: number; name: string; enrolled_count: number }[]> {
+    return request<{ id: number; name: string; enrolled_count: number }[]>(
+      '/sections',
+      {},
+      () => [
+        { id: 1, name: '5-A', enrolled_count: 35 },
+        { id: 2, name: '5-B', enrolled_count: 42 },
+        { id: 3, name: '5-C', enrolled_count: 38 },
+        { id: 4, name: '5-D', enrolled_count: 30 },
+        { id: 5, name: '5-E', enrolled_count: 45 },
+        { id: 6, name: '5-F', enrolled_count: 28 },
+      ]
+    );
+  },
+
+  // --- TEACHER MANAGEMENT (SQL) ---
+  async getTeachers(): Promise<any[]> {
+    return request<any[]>('/teachers', {});
+  },
+
+  async addTeacher(data: { name: string; email: string; department?: string }): Promise<any> {
+    return request<any>('/teachers', {
+      method: 'POST',
+      body: JSON.stringify(data)
+    });
+  },
+
+  async removeTeacher(teacherId: number): Promise<any> {
+    return request<any>(`/teachers/${teacherId}`, {
+      method: 'DELETE'
+    });
+  },
+
+  // --- SUBJECT / COURSE MANAGEMENT (SQL) ---
+  async addCourse(data: { code: string; name: string; programme?: string; semester?: number; teacher_id?: number }): Promise<any> {
+    return request<any>('/courses', {
+      method: 'POST',
+      body: JSON.stringify(data)
+    });
+  },
+
+  async removeCourse(courseId: number): Promise<any> {
+    return request<any>(`/courses/${courseId}`, {
+      method: 'DELETE'
+    });
+  },
+
+  // --- STUDENT INBOUND EMAIL QUERIES ---
+  async submitStudentQuery(data: { subject: string; question: string; teacher_email?: string; priority?: string }): Promise<any> {
+    return request<any>('/student-queries', {
+      method: 'POST',
+      body: JSON.stringify(data)
+    });
+  },
+
+  async getStudentQueries(teacherEmail?: string, studentId?: number): Promise<any[]> {
+    const params = new URLSearchParams();
+    if (teacherEmail) params.append('teacher_email', teacherEmail);
+    if (studentId) params.append('student_id', studentId.toString());
+    const qs = params.toString() ? `?${params.toString()}` : '';
+    return request<any[]>(`/student-queries${qs}`, {});
+  },
+
+  async replyStudentQuery(queryId: number, reply: string): Promise<any> {
+    return request<any>(`/student-queries/${queryId}/reply`, {
+      method: 'POST',
+      body: JSON.stringify({ reply })
+    });
+  },
+
+  // --- AI ACADEMIC ASSISTANT ---
+  async askAssistant(message: string, role?: string, context?: string): Promise<{ reply: string; suggestions: string[]; role: string; mode: string }> {
+    return request<any>('/ai/assistant', {
+      method: 'POST',
+      body: JSON.stringify({ message, role, context })
+    }, () => ({
+      reply: 'AI Assistant is ready to help! Ask any question about course materials or class operations.',
+      suggestions: ['How to start online class?', 'Explain backpropagation', 'Add new student'],
+      role: role || 'STUDENT',
+      mode: 'OFFLINE'
+    }));
   }
 };
+

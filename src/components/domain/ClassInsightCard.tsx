@@ -19,9 +19,9 @@ export const ClassInsightCard: React.FC<ClassInsightCardProps> = ({
   const lo4 = insights.outcomes.find((o) => o.code === 'LO4');
 
   return (
-    <div className={`p-6 rounded-2xl bg-gradient-to-br from-navy-900 via-navy-950 to-[#071022] border border-indigo-500/25 shadow-xl relative overflow-hidden ${className}`}>
+    <div className={`p-6 rounded-2xl bg-[#0B1B3A] border border-indigo-500/25 shadow-xl relative overflow-hidden ${className}`}>
       {/* Top Banner with Provenance */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-slate-800">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-slate-700/80">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="text-xs font-mono font-bold uppercase tracking-wider text-indigo-400">
@@ -35,17 +35,17 @@ export const ClassInsightCard: React.FC<ClassInsightCardProps> = ({
         </div>
 
         {/* Attendance & Respondent stats */}
-        <div className="flex items-center gap-4 text-xs font-mono text-slate-300">
+        <div className="flex items-center gap-4 text-xs font-mono">
           <div>
-            <span className="text-slate-400 block text-[10px]">ENROLLED</span>
+            <span className="text-slate-400 block text-[10px] font-semibold">ENROLLED</span>
             <span className="font-bold text-sm text-white">{insights.section.enrolled_count} Students</span>
           </div>
-          <div className="border-l border-slate-800 pl-4">
-            <span className="text-slate-400 block text-[10px]">RESPONDENTS</span>
+          <div className="border-l border-slate-700 pl-4">
+            <span className="text-slate-400 block text-[10px] font-semibold">RESPONDENTS</span>
             <span className="font-bold text-sm text-emerald-400">{insights.respondents} Submitted</span>
           </div>
-          <div className="border-l border-slate-800 pl-4">
-            <span className="text-slate-400 block text-[10px]">LIVE ACTIVE</span>
+          <div className="border-l border-slate-700 pl-4">
+            <span className="text-slate-400 block text-[10px] font-semibold">LIVE ACTIVE</span>
             <span className="font-bold text-sm text-indigo-400">{insights.live_participants} (Riya)</span>
           </div>
         </div>
@@ -53,24 +53,24 @@ export const ClassInsightCard: React.FC<ClassInsightCardProps> = ({
 
       {/* Critical Headline Warning: 35 Students Need Support on LO4 */}
       {lo4 && (
-        <div className="p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 mb-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div className="p-4 rounded-xl bg-rose-950/40 border border-rose-500/40 mb-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div className="flex items-start gap-3">
             <div className="p-2 rounded-lg bg-rose-500/20 text-rose-400 mt-0.5">
               <AlertTriangle className="w-5 h-5" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-xs font-mono font-bold px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-300 border border-rose-500/30">
+                <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-rose-500/30 text-rose-200 border border-rose-500/40">
                   CRITICAL WARNING
                 </span>
-                <span className="text-base font-bold text-rose-300 font-display">
+                <span className="text-base font-bold text-rose-200 font-display">
                   {insights.support_summary.text}
                 </span>
               </div>
-              <p className="text-xs text-slate-300 mt-1 max-w-2xl leading-relaxed">
+              <p className="text-xs text-rose-100/90 mt-1 max-w-2xl leading-relaxed font-normal">
                 61% of respondents in Section 5-A demonstrated sub-threshold mastery (class average: 41%).
                 {lo4.top_misconception && (
-                  <span className="block text-rose-200/90 font-medium mt-0.5">
+                  <span className="block text-rose-200 font-semibold mt-0.5">
                     Dominant misconception: {lo4.top_misconception.label} ({lo4.top_misconception.count} students).
                   </span>
                 )}
@@ -82,7 +82,7 @@ export const ClassInsightCard: React.FC<ClassInsightCardProps> = ({
             {onViewEvidence && (
               <button
                 onClick={() => onViewEvidence(4)}
-                className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-colors"
+                className="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white border border-slate-600 transition-colors cursor-pointer"
               >
                 View Evidence
               </button>
@@ -90,7 +90,7 @@ export const ClassInsightCard: React.FC<ClassInsightCardProps> = ({
             {onOpenRecommendations && (
               <button
                 onClick={onOpenRecommendations}
-                className="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-rose-600 hover:bg-rose-500 text-white transition-colors shadow-sm"
+                className="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-rose-600 hover:bg-rose-500 text-white transition-colors shadow-sm cursor-pointer"
               >
                 Re-teach Recommendation
               </button>
@@ -108,8 +108,8 @@ export const ClassInsightCard: React.FC<ClassInsightCardProps> = ({
               key={item.outcome_id}
               className={`p-3.5 rounded-xl border transition-all ${
                 isWarning
-                  ? 'bg-rose-950/20 border-rose-500/40 text-rose-200'
-                  : 'bg-navy-900/60 border-slate-800 text-slate-200'
+                  ? 'bg-rose-950/40 border-rose-500/50 text-rose-200'
+                  : 'bg-navy-950/80 border-slate-700/80 text-white'
               }`}
             >
               <div className="flex items-center justify-between mb-1.5">
@@ -122,7 +122,7 @@ export const ClassInsightCard: React.FC<ClassInsightCardProps> = ({
                   {item.class_mastery_percent}%
                 </span>
               </div>
-              <div className="text-xs text-slate-300 font-medium truncate mb-2" title={item.statement}>
+              <div className="text-xs text-white font-semibold truncate mb-2" title={item.statement}>
                 {item.statement}
               </div>
 
@@ -145,7 +145,7 @@ export const ClassInsightCard: React.FC<ClassInsightCardProps> = ({
                 />
               </div>
 
-              <div className="flex justify-between text-[10px] text-slate-400 mt-1 font-mono">
+              <div className="flex justify-between text-[10px] text-slate-300 mt-1.5 font-mono">
                 <span>{item.distribution.strong} Strong</span>
                 <span>{item.distribution.developing} Dev</span>
                 <span className={item.distribution.weak > 20 ? 'text-rose-400 font-bold' : ''}>

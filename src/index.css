@@ -17,34 +17,68 @@
     background-color: #071022;
     color: #F1F5F9;
     font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 13.5px;
+    font-weight: 380;
+    line-height: 1.5;
+    letter-spacing: -0.012em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  h1, h2, h3, h4, .font-display {
+  /* Sleek, lighter headings to eliminate bulky look */
+  h1 {
     font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+    font-size: 1.45rem;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.25;
+  }
+
+  h2 {
+    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+  }
+
+  h3 {
+    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+    font-size: 1.05rem;
+    font-weight: 550;
+    letter-spacing: -0.015em;
+  }
+
+  h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+    font-size: 0.9rem;
+    font-weight: 550;
+    letter-spacing: -0.01em;
   }
 
   code, pre, .font-mono {
     font-family: 'JetBrains Mono', monospace;
+    font-size: 0.825rem;
   }
 }
 
 /* Custom scrollbars for data tables and side panels */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(11, 27, 58, 0.5);
+  background: rgba(11, 27, 58, 0.4);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(100, 116, 139, 0.4);
+  background: rgba(100, 116, 139, 0.35);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(148, 163, 184, 0.6);
+  background: rgba(148, 163, 184, 0.55);
 }
 
 /* Glassmorphism utility */
@@ -61,3 +95,174 @@
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
+
+/* Lite typography & compact styling tokens */
+.text-lite {
+  font-weight: 350;
+  color: #94A3B8;
+  letter-spacing: -0.01em;
+}
+
+.text-lite-sm {
+  font-size: 0.775rem;
+  font-weight: 350;
+  color: #94A3B8;
+  line-height: 1.4;
+}
+
+.card-compact {
+  padding: 1rem;
+  border-radius: 0.875rem;
+  background-color: rgba(11, 27, 58, 0.85);
+  border: 1px solid rgba(99, 102, 241, 0.15);
+}
+
+/* White Mix Enterprise Theme (Commercial SaaS Grade with Crystal Clear Text) */
+.theme-white-mix {
+  background-color: #F8FAFC !important;
+  color: #0F172A !important;
+}
+
+.theme-white-mix header {
+  background-color: #FFFFFF !important;
+  border-color: #CBD5E1 !important;
+  color: #0F172A !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+}
+
+.theme-white-mix aside {
+  background-color: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+}
+
+/* Remove dark background gradients on light theme */
+.theme-white-mix [class*="bg-gradient-"] {
+  background-image: none !important;
+  background-color: #FFFFFF !important;
+  border-color: #CBD5E1 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05) !important;
+}
+
+.theme-white-mix .bg-navy-900,
+.theme-white-mix .bg-navy-950,
+.theme-white-mix [class*="bg-navy-900"],
+.theme-white-mix [class*="bg-navy-950"],
+.theme-white-mix .bg-\[\#0B1B3A\],
+.theme-white-mix .bg-\[\#071022\] {
+  background-color: #FFFFFF !important;
+  color: #0F172A !important;
+  border-color: #CBD5E1 !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Headings crystal clear deep contrast */
+.theme-white-mix h1,
+.theme-white-mix h2,
+.theme-white-mix h3,
+.theme-white-mix h4,
+.theme-white-mix h5,
+.theme-white-mix h6 {
+  color: #0F172A !important;
+}
+
+.theme-white-mix .text-white {
+  color: #0F172A !important;
+}
+
+.theme-white-mix .text-slate-100,
+.theme-white-mix .text-slate-200,
+.theme-white-mix .text-slate-300 {
+  color: #1E293B !important;
+}
+
+.theme-white-mix .text-slate-400 {
+  color: #475569 !important;
+}
+
+.theme-white-mix .text-slate-500 {
+  color: #64748B !important;
+}
+
+.theme-white-mix .border-slate-800,
+.theme-white-mix .border-slate-700,
+.theme-white-mix .border-slate-900 {
+  border-color: #E2E8F0 !important;
+}
+
+.theme-white-mix .bg-slate-800,
+.theme-white-mix .bg-slate-900 {
+  background-color: #F1F5F9 !important;
+  color: #0F172A !important;
+  border-color: #CBD5E1 !important;
+}
+
+/* Alert & Metric containers in white mix */
+.theme-white-mix [class*="bg-rose-500/10"],
+.theme-white-mix [class*="bg-rose-950/20"] {
+  background-color: #FFF1F2 !important;
+  border-color: #FDA4AF !important;
+}
+
+.theme-white-mix .text-rose-300,
+.theme-white-mix .text-rose-400 {
+  color: #BE123C !important;
+}
+
+.theme-white-mix .text-rose-200 {
+  color: #9F1239 !important;
+}
+
+.theme-white-mix .text-emerald-400 {
+  color: #047857 !important;
+}
+
+.theme-white-mix .text-amber-400 {
+  color: #B45309 !important;
+}
+
+.theme-white-mix .text-indigo-400 {
+  color: #4338CA !important;
+}
+
+/* Buttons and Badges MUST preserve vivid contrast and white text */
+.theme-white-mix button.bg-indigo-600,
+.theme-white-mix button.bg-indigo-500,
+.theme-white-mix button.bg-emerald-600,
+.theme-white-mix button.bg-rose-600,
+.theme-white-mix button.bg-amber-600,
+.theme-white-mix [class*="bg-indigo-600"],
+.theme-white-mix [class*="bg-indigo-600"] span,
+.theme-white-mix [class*="bg-emerald-600"],
+.theme-white-mix [class*="bg-emerald-600"] span,
+.theme-white-mix [class*="bg-rose-600"],
+.theme-white-mix [class*="bg-rose-600"] span {
+  color: #FFFFFF !important;
+}
+
+.theme-white-mix input,
+.theme-white-mix select {
+  background-color: #FFFFFF !important;
+  color: #0F172A !important;
+  border-color: #CBD5E1 !important;
+}
+
+.theme-white-mix input::placeholder {
+  color: #94A3B8 !important;
+}
+
+.theme-white-mix table thead tr {
+  background-color: #F8FAFC !important;
+  color: #334155 !important;
+}
+
+.theme-white-mix table tbody tr {
+  border-color: #F1F5F9 !important;
+  color: #1E293B !important;
+}
+
+.theme-white-mix table tbody tr:hover {
+  background-color: #F8FAFC !important;
+}
+
+
+

@@ -7,11 +7,14 @@ import { LoginPage } from './pages/LoginPage';
 // Teacher Screens
 import { TeacherDashboard } from './pages/teacher/TeacherDashboard';
 import { TeacherCourses } from './pages/teacher/TeacherCourses';
+import { TeacherStudents } from './pages/teacher/TeacherStudents';
 import { LessonBuilder } from './pages/teacher/LessonBuilder';
 import { TeacherClassroom } from './pages/teacher/TeacherClassroom';
 import { AssessmentViewer } from './pages/teacher/AssessmentViewer';
 import { ClassInsights } from './pages/teacher/ClassInsights';
 import { TeacherRecommendations } from './pages/teacher/TeacherRecommendations';
+import { AiHelpAgent } from './components/ui/AiHelpAgent';
+
 
 // Student Screens
 import { StudentDashboard } from './pages/student/StudentDashboard';
@@ -22,6 +25,7 @@ import { SkillPassportPage } from './pages/student/SkillPassportPage';
 
 // Admin Screens
 import { AdminOverview } from './pages/admin/AdminOverview';
+import { TeacherManagement } from './pages/admin/TeacherManagement';
 import { AcademicAnalytics } from './pages/admin/AcademicAnalytics';
 import { AiGovernancePage } from './pages/admin/AiGovernancePage';
 
@@ -100,6 +104,10 @@ function MainRouter() {
         return <TeacherDashboard onNavigate={navigate} />;
       case '/teacher/courses':
         return <TeacherCourses onNavigate={navigate} />;
+      case '/teacher/students':
+        return <TeacherStudents onNavigate={navigate} />;
+      case '/teacher/faculty':
+        return <TeacherManagement onNavigate={navigate} />;
       case '/teacher/lesson-builder':
         return <LessonBuilder onNavigate={navigate} />;
       case '/teacher/classroom':
@@ -126,6 +134,8 @@ function MainRouter() {
       // Admin Screens (SC15 - SC17)
       case '/admin':
         return <AdminOverview onNavigate={navigate} />;
+      case '/admin/teachers':
+        return <TeacherManagement onNavigate={navigate} />;
       case '/admin/analytics':
         return <AcademicAnalytics />;
       case '/admin/governance':
@@ -154,6 +164,7 @@ export default function App() {
   return (
     <PlatformProvider>
       <MainRouter />
+      <AiHelpAgent />
     </PlatformProvider>
   );
 }

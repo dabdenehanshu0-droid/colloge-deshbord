@@ -107,6 +107,20 @@ class TutorAskResponse(BaseModel):
     mode: str = "FALLBACK"
 
 
+class AIAssistantRequest(BaseModel):
+    message: str = Field(..., min_length=1, max_length=1000)
+    role: Optional[str] = "STUDENT"
+    context: Optional[str] = None
+
+
+class AIAssistantResponse(BaseModel):
+    reply: str
+    suggestions: List[str] = Field(default_factory=list)
+    role: str = "STUDENT"
+    mode: str = "LIVE"
+
+
+
 # --- Teacher Intelligence ---
 class ClassOutcomeInsight(BaseModel):
     outcome_id: int

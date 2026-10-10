@@ -109,40 +109,40 @@ export const ClassInsights: React.FC<ClassInsightsProps> = ({ onNavigate }) => {
         </div>
 
         {/* Misconception Summary Rail (4 Cols) */}
-        <div className="lg:col-span-4 p-5 rounded-2xl bg-navy-900/80 border border-slate-800 space-y-4 flex flex-col justify-between">
+        <div className="lg:col-span-4 p-5 rounded-2xl bg-[#0B1B3A] border border-indigo-500/25 space-y-4 flex flex-col justify-between shadow-xl">
           <div>
             <div className="flex items-center gap-2 mb-3">
               <AlertTriangle className="w-4 h-4 text-rose-400" />
-              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-200">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-100">
                 Dominant Error Pattern
               </h3>
             </div>
 
-            <div className="p-3.5 rounded-xl bg-rose-950/20 border border-rose-500/35 space-y-2 mb-3">
-              <span className="text-xs font-bold text-rose-300 block">
+            <div className="p-3.5 rounded-xl bg-rose-950/40 border border-rose-500/40 space-y-2 mb-3">
+              <span className="text-xs font-bold text-rose-200 block">
                 Output error applied directly to hidden weights
               </span>
-              <p className="text-xs text-slate-300 leading-relaxed">
+              <p className="text-xs text-rose-100/90 leading-relaxed font-normal">
                 29 students in this cohort bypassed the chain rule, assuming output error δ_out applies directly to hidden layer weights without recursive transpose matrix multiplication.
               </p>
             </div>
 
-            <div className="p-3 rounded-xl bg-slate-900/60 border border-slate-800 text-xs text-slate-300 space-y-1">
-              <span className="font-semibold text-white block">Intervention Required:</span>
-              <span>Remedial 10-minute recap focusing on the multivariate chain rule sensitivity term ∂L/∂w = δ · a.</span>
+            <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-700/80 text-xs text-slate-200 space-y-1">
+              <span className="font-bold text-white block">Intervention Required:</span>
+              <span className="text-slate-200">Remedial 10-minute recap focusing on the multivariate chain rule sensitivity term ∂L/∂w = δ · a.</span>
             </div>
           </div>
 
-          <div className="space-y-2 pt-2 border-t border-slate-800">
+          <div className="space-y-2 pt-2 border-t border-slate-700">
             <button
               onClick={() => setEvidenceDrawerOpen(true)}
-              className="w-full py-2 px-3 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-colors"
+              className="w-full py-2 px-3 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white border border-slate-600 transition-colors cursor-pointer"
             >
               Examine Full Response Evidence
             </button>
             <button
               onClick={() => onNavigate('/teacher/recommendations')}
-              className="w-full py-2 px-3 rounded-xl text-xs font-bold uppercase tracking-wider bg-rose-600 hover:bg-rose-500 text-white transition-colors flex items-center justify-center gap-1.5 shadow-sm"
+              className="w-full py-2 px-3 rounded-xl text-xs font-bold uppercase tracking-wider bg-rose-600 hover:bg-rose-500 text-white transition-colors flex items-center justify-center gap-1.5 shadow-sm cursor-pointer"
             >
               <span>Review Remedial Segment</span>
               <ArrowRight className="w-3.5 h-3.5" />

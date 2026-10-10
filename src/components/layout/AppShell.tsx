@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { usePlatform } from '../../context/PlatformContext';
 import { Role } from '../../types';
 import { ProvenanceChip } from '../ui/ProvenanceChip';
@@ -19,7 +19,9 @@ import {
   ExternalLink,
   ChevronDown,
   UserCheck,
-  LogOut
+  LogOut,
+  Sun,
+  Moon
 } from 'lucide-react';
 
 interface AppShellProps {
@@ -37,13 +39,42 @@ export const AppShell: React.FC<AppShellProps> = ({
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showResetModal, setShowResetModal] = useState(false);
   const [showRoleMenu, setShowRoleMenu] = useState(false);
+  const [themeMode, setThemeMode] = useState<'white-mix' | 'dark'>(() => {
+    if (typeof window !== 'undefined') {
+      return (localStorage.getItem('sgsu_theme_mode') as 'white-mix' | 'dark') || 'white-mix';
+    }
+    return 'white-mix';
+  });
+
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      if (themeMode === 'dark') {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('theme-white-mix');
+      } else {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('theme-white-mix');
+      }
+    }
+  }, [themeMode]);
+
+  const toggleTheme = () => {
+    const next = themeMode === 'white-mix' ? 'dark' : 'white-mix';
+    setThemeMode(next);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('sgsu_theme_mode', next);
+    }
+  };
+
 
   // Navigation Items per Role
   const teacherNav = [
     { path: '/teacher', label: 'Teacher Dashboard', icon: GraduationCap },
     { path: '/teacher/courses', label: 'My Courses', icon: BookOpen },
-    { path: '/teacher/lesson-builder', label: 'Lecture Builder', icon: Sparkles },
+    { path: '/teacher/students', label: 'Students & Attendance (SQL)', icon: Users },
+    { path: '/teacher/faculty', label: 'Faculty Directory (SQL)', icon: GraduationCap },
     { path: '/teacher/classroom', label: 'Smart Classroom', icon: Presentation },
+    { path: '/teacher/lesson-builder', label: 'Lecture Builder', icon: Sparkles },
     { path: '/teacher/assessment', label: 'Assessment Bank', icon: FileCheck2 },
     { path: '/teacher/insights', label: 'Class Insights', icon: BarChart2 },
     { path: '/teacher/recommendations', label: 'AI Recommendations', icon: Compass },
@@ -59,6 +90,7 @@ export const AppShell: React.FC<AppShellProps> = ({
 
   const adminNav = [
     { path: '/admin', label: 'University Overview', icon: Building2 },
+    { path: '/admin/teachers', label: 'Faculty Directory (SQL)', icon: GraduationCap },
     { path: '/admin/analytics', label: 'Academic Analytics', icon: BarChart2 },
     { path: '/admin/governance', label: 'AI Governance & Audit', icon: ShieldCheck },
   ];
@@ -79,7 +111,7 @@ export const AppShell: React.FC<AppShellProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-[#071022] text-slate-100 flex flex-col font-sans">
+    <div className={`min-h-screen flex flex-col font-sans transition-colors duration-200 ${themeMode === 'white-mix' ? 'theme-white-mix bg-[#F8FAFC]' : 'dark bg-[#071022] text-slate-100'}`}>
       {/* TOP BAR */}
       <header className="h-16 border-b border-indigo-500/20 bg-[#0B1B3A]/90 backdrop-blur-md sticky top-0 z-40 px-4 sm:px-6 flex items-center justify-between gap-4">
         {/* Left: Brand & Section Badge */}
@@ -118,18 +150,24 @@ export const AppShell: React.FC<AppShellProps> = ({
 
         {/* Center / Right: Quick Actions, Role Switcher, Full Demo Link, Reset */}
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* Live Backend Connection Indicator */}
-          <div
-            className={`hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-mono border transition-all ${
-              backendConnected
-                ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30'
-                : 'bg-rose-500/10 text-rose-400 border-rose-500/30'
-            }`}
-            title={backendConnected ? 'FastAPI + SQLite Database connected via /api proxy' : 'Backend unreachable - using resilient local store'}
+          {/* Theme Mode Toggle (White Mix / Dark Mode) */}
+          <button
+            onClick={toggleTheme}
+            title={themeMode === 'white-mix' ? 'Switch to Midnight Dark Mode' : 'Switch to Executive White Mix'}
+            className="p-1.5 sm:px-2.5 sm:py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 transition-colors flex items-center gap-1.5 cursor-pointer shadow-sm"
           >
-            <span className={`w-2 h-2 rounded-full ${backendConnected ? 'bg-emerald-400 animate-pulse' : 'bg-rose-500'}`} />
-            <span>{backendConnected ? 'FastAPI Backend Active' : 'Backend Disconnected'}</span>
-          </div>
+            {themeMode === 'white-mix' ? (
+              <>
+                <Sun className="w-3.5 h-3.5 text-amber-400" />
+                <span className="hidden sm:inline text-amber-300 font-semibold">White Mix</span>
+              </>
+            ) : (
+              <>
+                <Moon className="w-3.5 h-3.5 text-indigo-300" />
+                <span className="hidden sm:inline text-indigo-200 font-semibold">Dark Mode</span>
+              </>
+            )}
+          </button>
 
           {/* Demonstration Runner Link */}
           <button

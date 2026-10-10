@@ -23,17 +23,17 @@ export const OutcomeBarChart: React.FC<OutcomeBarChartProps> = ({
   }));
 
   return (
-    <div className={`p-5 rounded-xl bg-navy-900/80 border border-slate-800 ${className}`}>
+    <div className={`p-5 rounded-xl bg-white dark:bg-navy-900/80 border border-slate-200 dark:border-slate-800 shadow-sm ${className}`}>
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
-        <h4 className="text-sm font-semibold text-white tracking-wide">{title}</h4>
-        <div className="flex items-center gap-4 text-xs font-mono text-slate-400">
+        <h4 className="text-sm font-bold text-slate-900 dark:text-white tracking-wide">{title}</h4>
+        <div className="flex items-center gap-4 text-xs font-mono text-slate-500 dark:text-slate-400">
           <div className="flex items-center gap-1.5">
-            <span className="w-2.5 h-0.5 bg-amber-400" />
-            <span>Developing (50%)</span>
+            <span className="w-2.5 h-0.5 bg-amber-500" />
+            <span className="font-medium">Developing (50%)</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="w-2.5 h-0.5 bg-emerald-400" />
-            <span>Strong (70%)</span>
+            <span className="w-2.5 h-0.5 bg-emerald-500" />
+            <span className="font-medium">Strong (70%)</span>
           </div>
         </div>
       </div>
@@ -41,19 +41,19 @@ export const OutcomeBarChart: React.FC<OutcomeBarChartProps> = ({
       <div className="relative pt-6 pb-2" style={{ height: `${chartHeight}px` }}>
         {/* Horizontal grid & threshold lines */}
         <div className="absolute inset-0 flex flex-col justify-between pointer-events-none pb-8 text-[11px] font-mono text-slate-400">
-          <div className="relative border-b border-slate-800">
-            <span className="absolute -top-3 right-0">100%</span>
+          <div className="relative border-b border-slate-200 dark:border-slate-800">
+            <span className="absolute -top-3 right-0 font-medium">100%</span>
           </div>
           {/* 70% Strong line */}
-          <div className="relative border-b border-dashed border-emerald-500/40">
-            <span className="absolute -top-3 right-0 text-emerald-400">70%</span>
+          <div className="relative border-b border-dashed border-emerald-500/50">
+            <span className="absolute -top-3 right-0 text-emerald-600 dark:text-emerald-400 font-bold">70%</span>
           </div>
           {/* 50% Developing line */}
-          <div className="relative border-b border-dashed border-amber-500/40">
-            <span className="absolute -top-3 right-0 text-amber-400">50%</span>
+          <div className="relative border-b border-dashed border-amber-500/50">
+            <span className="absolute -top-3 right-0 text-amber-600 dark:text-amber-400 font-bold">50%</span>
           </div>
-          <div className="relative border-b border-slate-800">
-            <span className="absolute -top-3 right-0">0%</span>
+          <div className="relative border-b border-slate-200 dark:border-slate-800">
+            <span className="absolute -top-3 right-0 font-medium">0%</span>
           </div>
         </div>
 
@@ -64,10 +64,10 @@ export const OutcomeBarChart: React.FC<OutcomeBarChartProps> = ({
             const isWeak = item.percent < 50;
             const isDeveloping = item.percent >= 50 && item.percent < 70;
             const colorClass = isWeak
-              ? 'bg-rose-500 hover:bg-rose-400'
+              ? 'bg-rose-500 hover:bg-rose-600'
               : isDeveloping
-              ? 'bg-amber-500 hover:bg-amber-400'
-              : 'bg-emerald-500 hover:bg-emerald-400';
+              ? 'bg-amber-500 hover:bg-amber-600'
+              : 'bg-emerald-500 hover:bg-emerald-600';
 
             return (
               <div key={index} className="flex flex-col items-center group relative h-full justify-end max-w-[4rem] w-full">
@@ -77,7 +77,7 @@ export const OutcomeBarChart: React.FC<OutcomeBarChartProps> = ({
                 </div>
 
                 {/* Score label above bar */}
-                <span className="text-xs font-mono font-bold text-white mb-1">
+                <span className="text-xs font-mono font-bold text-slate-900 dark:text-white mb-1">
                   {item.percent}%
                 </span>
 
@@ -88,7 +88,7 @@ export const OutcomeBarChart: React.FC<OutcomeBarChartProps> = ({
                 />
 
                 {/* Outcome code label below bar */}
-                <span className="absolute -bottom-6 text-xs font-mono font-bold text-slate-300">
+                <span className="absolute -bottom-6 text-xs font-mono font-bold text-slate-700 dark:text-slate-300">
                   {item.code}
                 </span>
               </div>

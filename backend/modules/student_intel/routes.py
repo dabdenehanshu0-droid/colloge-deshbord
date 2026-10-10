@@ -28,7 +28,10 @@ from backend.schemas.intelligence import (
     PracticeAssignResponse,
     TutorAskRequest,
     TutorAskResponse,
+    AIAssistantRequest,
+    AIAssistantResponse,
 )
+from backend.services.assistant_service import process_assistant_query
 
 router = APIRouter(prefix="/api", tags=["Student Intelligence"])
 
@@ -122,3 +125,20 @@ async def ask_tutor(
     student_id = int(claims["student_id"])
     user_id = int(claims["sub"])
     return await ask_tutor_service(req.question, req.outcome_id, student_id, user_id, db)
+
+
+@router.post("/ai/assistant", response_model=AIAssistantResponse)
+def get_ai_assistant(
+    req: AIAssistantRequest,
+    claims: dict = Depends(get_current_user_claims),
+    db: Session = Depends(get_db),
+):
+    """AI Academic Assistant providing tailored support for Teachers and Students."""
+    user_role = claims.get("role", req.role or "STUDENT")
+    return process_assistant_query(
+        message=req.message,
+        role=user_role,
+        context=req.context,
+        db=db,
+    )
+

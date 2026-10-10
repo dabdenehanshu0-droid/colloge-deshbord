@@ -34,11 +34,16 @@ class LoginRequest(BaseModel):
     role: str = Field(..., description="STUDENT | TEACHER | ADMIN")
 
 
+class StudentLoginRequest(BaseModel):
+    student_id: str = Field(..., description="Student roll number or ID, e.g. 2024-CSE-5A-01 or 0101CS221088")
+
+
 class TokenResponse(BaseModel):
     access_token: str
     token_type: str = "bearer"
     expires_in: int
     user: UserResponse
+
 
 
 class ConfigResponse(BaseModel):

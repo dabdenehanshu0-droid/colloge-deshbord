@@ -171,3 +171,22 @@ class Misconception(Base):
 
     learning_outcome = relationship("LearningOutcome", back_populates="misconceptions")
     options = relationship("QuestionOption", back_populates="misconception")
+
+
+class StudentQuery(Base):
+    """Academic doubts and questions submitted by students to teacher's email."""
+    __tablename__ = "student_queries"
+
+    id = Column(Integer, primary_key=True, index=True)
+    student_id = Column(Integer, nullable=True)
+    student_name = Column(String(100), nullable=False)
+    student_roll = Column(String(50), nullable=False, default="2024-CSE-5A-01")
+    teacher_email = Column(String(120), nullable=False, index=True)
+    subject = Column(String(200), nullable=False)
+    question = Column(Text, nullable=False)
+    priority = Column(String(20), default="NORMAL")  # LOW, NORMAL, URGENT
+    status = Column(String(20), default="OPEN")  # OPEN, ANSWERED, RESOLVED
+    reply = Column(Text, nullable=True)
+    created_at = Column(DateTime, default=utcnow, nullable=False)
+    replied_at = Column(DateTime, nullable=True)
+
